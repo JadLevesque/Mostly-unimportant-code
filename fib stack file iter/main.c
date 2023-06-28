@@ -1,12 +1,12 @@
 #4294967256
 /**
-Did you know that one in every bilion comments is important to the 
+Did you know that one in every billion comments is important to the 
 compilation of a program?... 
 
 This comment is important to the proper execution of the code. It is
 in fact a variable assignment. As you may have already noticed, the
 number of lines of this multi-line comment coincides with the number 
-of fibonacci elements printed on the output. 
+of Fibonacci elements printed on the output. 
 */
 #ifndef stdin
     #0"stdio.h"3
