@@ -2,6 +2,8 @@
 
 This code only works for GCC versions *TBD*
 
+
+
 ### Line 1:
 ```C
 #4294967256
@@ -35,6 +37,8 @@ This tests if `stdio.h` has been included.
 ```
 This is another linemarker. In this instance, it sets the next line to `0`, the file name to `stdio.h`, and the current file in the file stack as a system header, which disables a few warnings.
 The next line just includes `stdio.h`. The comment is there to keep the syntax highlighter of Godbolt happy.
+
+Note: despite the line changing through this linemarker, the iteration condition is not affaceted by this. This is because the program metaprogram is very inefficient and will most probably crash before reaching an pre-overflow corner case.
 
 ### Line 14
 ```C
@@ -70,3 +74,35 @@ Those are the macro stack manipulation operations.
     #define DUMP(xs...) EAT (xs)
 ```
 `DUMP` servers the purpose of evaluation a macro and discarding it's expansion. This is necessairy to evaluate `__COUNTER__` without using it's value.
+
+### Lines 31 and 32
+```C
+    #define IF_(t,f...) f
+    #define IF_1(t,f...) t
+```
+Churche booleans.
+
+### Line 34
+```C
+    #define ONEP(x,xs...) IF_##__VA_OPT__(1)
+```
+Singleton predicate.
+
+### Lines 36 to 49
+```C
+    #define A(...) 
+    #define B(...)
+    #define C(...)
+
+    PH (B)
+    PH (C)
+
+    #undef B
+    #undef C
+
+    #define B(...) PP (B) B (.) __VA_OPT__ (PH (C) PH (A))
+    #define C(...) PP (C) C (.) __VA_OPT__ (PH (B))
+
+    PH (B)
+```
+This is the initialisation stage of the metaprogram. `A`, `B`, and `C` are our variables  
