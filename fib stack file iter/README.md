@@ -90,7 +90,7 @@ Singleton predicate.
 
 ### Lines 36 to 49
 ```C
-    #define A(...) 
+    #define A(...)
     #define B(...)
     #define C(...)
 
